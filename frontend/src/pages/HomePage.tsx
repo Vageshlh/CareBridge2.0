@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import Logo from '../components/Logo';
 
 const HomePage: React.FC = () => {
   const { theme } = useTheme();
@@ -10,7 +11,7 @@ const HomePage: React.FC = () => {
       {/* Hero section */}
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary-200 to-primary-400 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
+          <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-blue-200 to-blue-400 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
         </div>
         
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
@@ -24,7 +25,7 @@ const HomePage: React.FC = () => {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 to="/login"
-                className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+                className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 Get started
               </Link>
@@ -36,268 +37,412 @@ const HomePage: React.FC = () => {
         </div>
         
         <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-          <div className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-primary-200 to-primary-400 opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"></div>
+          <div className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-blue-200 to-blue-400 opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"></div>
         </div>
       </div>
 
-      {/* Features section */}
-      <div className="py-24 sm:py-32">
+      {/* About section */}
+      <div id="about" className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-primary-600">Better Healthcare</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Everything you need for your health
-            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              About CareBridge
+            </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              CareBridge provides a comprehensive telemedicine platform that connects patients with doctors for virtual consultations, appointment scheduling, and more.
+              CareBridge is a revolutionary telemedicine platform that connects patients with qualified healthcare professionals through secure, high-quality video consultations. Our mission is to make healthcare more accessible, convenient, and affordable for everyone.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-              <div className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="mt-4 lg:ml-6 lg:mt-0">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">Licensed Professionals</h3>
+                  <p className="mt-2 text-base text-gray-500">
+                    All our healthcare providers are licensed, verified, and experienced professionals committed to providing quality care.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
                     <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  24/7 Availability
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">Access healthcare services anytime, anywhere. Our platform is available 24/7 for your convenience.</dd>
+                </div>
+                <div className="mt-4 lg:ml-6 lg:mt-0">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">Available 24/7</h3>
+                  <p className="mt-2 text-base text-gray-500">
+                    Get medical support whenever you need it with our round-the-clock availability and emergency consultation services.
+                  </p>
+                </div>
               </div>
-
-              <div className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
                     <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                     </svg>
                   </div>
-                  Qualified Doctors
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">Connect with verified and experienced healthcare professionals specializing in various fields.</dd>
+                </div>
+                <div className="mt-4 lg:ml-6 lg:mt-0">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">HIPAA Compliant</h3>
+                  <p className="mt-2 text-base text-gray-500">
+                    Your privacy and medical information are protected with industry-leading security measures and HIPAA compliance.
+                  </p>
+                </div>
               </div>
-
-              <div className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600">
                     <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H4.5m2.25 0v3m0 0v.375c0 .621-.504 1.125-1.125 1.125H4.5m2.25 0H7.5m0 0v-.375c0-.621.504-1.125 1.125-1.125h.375m0 0H9.75v-1.5m0 0h-.375C8.754 5.25 8.25 5.754 8.25 6.375v.375m0 0v3.75m0 0h-.375C7.254 10.5 6.75 10.996 6.75 11.625V12h.375m0 0H9.75v-1.5m0 0h.375c.621 0 1.125.504 1.125 1.125v.375M9.75 12H12m-2.25 0v.375c0 .621.504 1.125 1.125 1.125h.375M12 12v-1.5m0 0h.375c.621 0 1.125-.504 1.125-1.125V9.75m0 0H15m-3 0v-.375c0-.621-.504-1.125-1.125-1.125H11.25m0 0H9.75v1.5" />
                     </svg>
                   </div>
-                  Secure Consultations
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">Our platform ensures private and secure video consultations with end-to-end encryption.</dd>
+                </div>
+                <div className="mt-4 lg:ml-6 lg:mt-0">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">Affordable Care</h3>
+                  <p className="mt-2 text-base text-gray-500">
+                    Quality healthcare shouldn't break the bank. We offer competitive pricing and accept most insurance plans.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* How CareBridge Works section */}
+      <div className="py-24 sm:py-32 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              How CareBridge Works
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Getting healthcare has never been easier. Follow these simple steps to connect with a doctor.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+            <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                  <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold leading-7 text-gray-900">1. Find a Doctor</h3>
+                <p className="mt-2 text-base leading-7 text-gray-600">
+                  Browse our network of qualified healthcare professionals and find the right specialist for your needs.
+                </p>
               </div>
 
-              <div className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
-                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
-                    </svg>
-                  </div>
-                  Digital Prescriptions
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">Receive digital prescriptions directly through the platform after your consultation.</dd>
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                  <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5a2.25 2.25 0 002.25-2.25m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5a2.25 2.25 0 012.25 2.25v7.5" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold leading-7 text-gray-900">2. Book Appointment</h3>
+                <p className="mt-2 text-base leading-7 text-gray-600">
+                  Schedule your appointment at a time that works for you with our easy booking system.
+                </p>
               </div>
-            </dl>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                  <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold leading-7 text-gray-900">3. Connect Securely</h3>
+                <p className="mt-2 text-base leading-7 text-gray-600">
+                  Have your consultation through our secure video platform from the comfort of your home.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose CareBridge section */}
+      <div className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Why Choose CareBridge?
+            </h2>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+            <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                  <svg className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold leading-7 text-gray-900">HD Video Consultations</h3>
+                <p className="mt-2 text-base leading-7 text-gray-600">
+                  Crystal clear video calls with verified doctors from the comfort of your home.
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                  <svg className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold leading-7 text-gray-900">24/7 Availability</h3>
+                <p className="mt-2 text-base leading-7 text-gray-600">
+                  Access healthcare support anytime, anywhere with our round-the-clock support.
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                  <svg className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold leading-7 text-gray-900">Secure & Private</h3>
+                <p className="mt-2 text-base leading-7 text-gray-600">
+                  HIPAA-compliant platform ensuring your medical information stays confidential.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* CTA section */}
-      <div className="bg-primary-600">
+      <div className="bg-blue-600">
         <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Start your healthcare journey today
+              Ready to Transform Your Healthcare Experience?
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-100">
-              Join thousands of patients who have already experienced the convenience of telemedicine with CareBridge.
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-blue-100">
+              Join thousands of patients who trust CareBridge for convenient, quality healthcare.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 to="/login"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-primary-600 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="rounded-md bg-white px-6 py-3 text-base font-semibold text-blue-600 shadow-sm hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                Get started
+                Book Your Consultation
               </Link>
               <button
                 onClick={() => {
-                  const aboutSection = document.getElementById('about');
+                  const aboutSection = document.querySelector('#about');
                   if (aboutSection) {
                     aboutSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="rounded-md bg-primary-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="rounded-md border border-white px-6 py-3 text-base font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                Learn more
+                Learn More
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* About Section */}
-        <div id="about" className={`py-16 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="lg:text-center">
-              <h2 className={`text-base font-semibold tracking-wide uppercase ${theme === 'dark' ? 'text-primary-400' : 'text-primary-600'}`}>
-                About CareBridge
-              </h2>
-              <p className={`mt-2 text-3xl font-bold leading-8 tracking-tight sm:text-4xl ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                Connecting Patients and Healthcare Providers
-              </p>
-              <p className={`mt-4 max-w-2xl text-xl lg:mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                CareBridge is a comprehensive healthcare platform designed to bridge the gap between patients and healthcare providers through innovative technology and seamless communication.
-              </p>
-            </div>
-
-            <div className="mt-10">
-              <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-                <div className="relative">
-                  <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <p className={`ml-16 text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Our Mission</p>
-                  <p className={`mt-2 ml-16 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                    To revolutionize healthcare accessibility by providing a secure, user-friendly platform that connects patients with qualified healthcare professionals, enabling better health outcomes through technology.
-                  </p>
-                </div>
-
-                <div className="relative">
-                  <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <p className={`ml-16 text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Our Vision</p>
-                  <p className={`mt-2 ml-16 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                    To become the leading healthcare platform that empowers patients to take control of their health journey while providing healthcare providers with the tools they need to deliver exceptional care.
-                  </p>
-                </div>
-
-                <div className="relative">
-                  <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                    </svg>
-                  </div>
-                  <p className={`ml-16 text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Our Team</p>
-                  <p className={`mt-2 ml-16 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                    Our dedicated team consists of healthcare professionals, technology experts, and patient advocates working together to create innovative solutions for modern healthcare challenges.
-                  </p>
-                </div>
-
-                <div className="relative">
-                  <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <p className={`ml-16 text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Security & Privacy</p>
-                  <p className={`mt-2 ml-16 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                    We prioritize the security and privacy of your health information with end-to-end encryption, HIPAA compliance, and robust data protection measures to ensure your information remains safe and confidential.
-                  </p>
-                </div>
-              </div>
-            </div>
+      {/* Contact section */}
+      <div id="contact" className="py-24 sm:py-32 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Contact Us
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Get in touch with our team for support, questions, or to learn more about our services.
+            </p>
           </div>
-        </div>
-
-        {/* Contact Section */}
-        <div id="contact" className={`py-16 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'}`}>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="lg:text-center">
-              <h2 className={`text-base font-semibold tracking-wide uppercase ${theme === 'dark' ? 'text-primary-400' : 'text-primary-600'}`}>
-                Contact Us
-              </h2>
-              <p className={`mt-2 text-3xl font-bold leading-8 tracking-tight sm:text-4xl ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                Get in Touch
-              </p>
-              <p className={`mt-4 max-w-2xl text-xl lg:mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                Have questions about CareBridge? We're here to help. Reach out to us through any of the following channels.
-              </p>
-            </div>
-
-            <div className="mt-10">
-              <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <dt className={`text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                      Email
-                    </dt>
-                    <dd className={`mt-2 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                      support@carebridge.com
-                    </dd>
-                  </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
+              <div className="flex flex-col items-center text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
+                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
                 </div>
-
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <dt className={`text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                      Phone
-                    </dt>
-                    <dd className={`mt-2 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                      +1 (555) 123-4567
-                    </dd>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
-                      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <dt className={`text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                      Address
-                    </dt>
-                    <dd className={`mt-2 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                      123 Healthcare Ave<br />
-                      Medical District, CA 90210
-                    </dd>
-                  </div>
-                </div>
+                <h3 className="mt-6 text-lg font-semibold leading-6 text-gray-900">Email Support</h3>
+                <p className="mt-2 text-base text-gray-600">
+                  support@carebridge.com
+                </p>
+                <p className="mt-1 text-sm text-gray-500">
+                  We respond within 24 hours
+                </p>
               </div>
-
-              <div className="mt-12 lg:text-center">
-                <h3 className={`text-lg leading-6 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                  Business Hours
-                </h3>
-                <div className={`mt-4 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-                  <p>Monday - Friday: 8:00 AM - 8:00 PM</p>
-                  <p>Saturday: 9:00 AM - 5:00 PM</p>
-                  <p>Sunday: 10:00 AM - 4:00 PM</p>
-                  <p className="mt-2 text-sm">Emergency support available 24/7</p>
+              <div className="flex flex-col items-center text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
+                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                </div>
+                <h3 className="mt-6 text-lg font-semibold leading-6 text-gray-900">Phone Support</h3>
+                <p className="mt-2 text-base text-gray-600">
+                  +1 (555) 123-4567
+                </p>
+                <p className="mt-1 text-sm text-gray-500">
+                  Available 24/7 for emergencies
+                </p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
+                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                </div>
+                <h3 className="mt-6 text-lg font-semibold leading-6 text-gray-900">Office Location</h3>
+                <p className="mt-2 text-base text-gray-600">
+                  123 Healthcare Ave<br />
+                  Medical District, CA 90210
+                </p>
+                <p className="mt-1 text-sm text-gray-500">
+                  Mon-Fri: 9AM-6PM PST
+                </p>
+              </div>
+            </div>
+            <div className="mt-16 bg-white rounded-lg shadow-sm p-8">
+              <h3 className="text-lg font-semibold leading-6 text-gray-900 mb-6">Emergency Support</h3>
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-600">
+                      <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-base font-medium text-gray-900">Medical Emergency</h4>
+                    <p className="mt-1 text-sm text-gray-600">
+                      For life-threatening emergencies, call 911 immediately or go to your nearest emergency room.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
+                      <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-base font-medium text-gray-900">24/7 Chat Support</h4>
+                    <p className="mt-1 text-sm text-gray-600">
+                      Use our in-app chat feature for immediate assistance with non-emergency medical questions.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
-  };
 
-  export default HomePage;
+      {/* Footer */}
+      <footer className="bg-gray-900">
+        <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
+          <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+            <div className="space-y-8">
+              <Logo className="text-white" showText={true} size="lg" />
+              <p className="text-sm leading-6 text-gray-300">
+                Virtual healthcare platform connecting patients with qualified medical professionals.
+              </p>
+            </div>
+            <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                <div>
+                  <h3 className="text-sm font-semibold leading-6 text-white">Services</h3>
+                  <ul role="list" className="mt-6 space-y-4">
+                    <li>
+                      <Link to="/doctors" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Video Consultations
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/doctors" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Prescription Services
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/doctors" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Health Records
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/doctors" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Specialist Referrals
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-10 md:mt-0">
+                  <h3 className="text-sm font-semibold leading-6 text-white">Support</h3>
+                  <ul role="list" className="mt-6 space-y-4">
+                    <li>
+                      <a href="#" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Help Center
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Contact Us
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm leading-6 text-gray-300 hover:text-white">
+                        Terms of Service
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="md:grid md:grid-cols-2 md:gap-8">
+                <div>
+                  <h3 className="text-sm font-semibold leading-6 text-white">Contact</h3>
+                  <ul role="list" className="mt-6 space-y-4">
+                    <li className="text-sm leading-6 text-gray-300">
+                      support@carebridge.com
+                    </li>
+                    <li className="text-sm leading-6 text-gray-300">
+                      +1 (555) 123-4567
+                    </li>
+                    <li className="text-sm leading-6 text-gray-300">
+                      123 Healthcare Ave<br />
+                      Medical District, CA 90210
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-16 border-t border-gray-700 pt-8 sm:mt-20 lg:mt-24">
+            <p className="text-xs leading-5 text-gray-400">
+              © 2024 CareBridge. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default HomePage;

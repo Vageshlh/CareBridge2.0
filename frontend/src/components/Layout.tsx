@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import ThemeToggle from './ThemeToggle';
+import Logo from './Logo';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../hooks/useAuth';
 
@@ -55,7 +56,7 @@ const Layout: React.FC = () => {
                 <div className="flex">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to="/">
-                      <span className="text-xl font-bold text-primary-600">CareBridge</span>
+                      <Logo size="md" showText={true} />
                     </Link>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
