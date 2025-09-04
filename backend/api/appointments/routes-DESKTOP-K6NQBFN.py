@@ -711,6 +711,18 @@ def upload_file(appointment_id):
         db.session.add(file_record)
         db.session.commit()
         
+        # Send notification to the recipient
+        recipient_id = str(appointment.patient_id) if str(user.id) == str(appointment.doctor_id) else str(appointment.doctor_id)
+        
+        NotificationService.send_notification(
+            user_id=recipient_id,
+            notification_type=NotificationType.FILE_UPLOADED,
+            title="New file uploaded",
+            message=f"A new file has been uploaded to your appointment",
+            resource_type="Appointment",
+            resource_id=str(appointment_id)
+        )
+        
         # Create a file message
         message = Message(
             id=uuid.uuid4(),

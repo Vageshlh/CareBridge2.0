@@ -59,11 +59,20 @@ export const Avatar: React.FC<AvatarProps> = ({
     xl: 'h-3.5 w-3.5'
   }[size];
 
-  // Get initials from name
+  // Get initials from name or localStorage
   const getInitials = () => {
-    if (!name) return '';
+    let displayName = name;
     
-    const names = name.split(' ');
+    // If no name provided, try to get from localStorage
+    if (!displayName) {
+      const firstName = localStorage.getItem('firstName');
+      const profileName = localStorage.getItem('profileName');
+      displayName = profileName || firstName || '';
+    }
+    
+    if (!displayName) return '';
+    
+    const names = displayName.split(' ');
     if (names.length === 1) {
       return names[0].charAt(0).toUpperCase();
     }
@@ -74,21 +83,31 @@ export const Avatar: React.FC<AvatarProps> = ({
     );
   };
 
-  // Generate random color based on name
-  const getRandomColor = () => {
-    if (!name) return 'bg-gray-500';
+  // Generate color based on name or use default blue gradient
+  const getAvatarColor = () => {
+    let displayName = name;
+    
+    // If no name provided, try to get from localStorage
+    if (!displayName) {
+      const firstName = localStorage.getItem('firstName');
+      const profileName = localStorage.getItem('profileName');
+      displayName = profileName || firstName || '';
+    }
+    
+    // Use blue gradient as default for CareBridge theme
+    if (!displayName) return 'bg-gradient-to-br from-blue-500 to-blue-600';
     
     const colors = [
-      'bg-red-500',
-      'bg-yellow-500',
-      'bg-green-500',
-      'bg-blue-500',
-      'bg-indigo-500',
-      'bg-purple-500',
-      'bg-pink-500'
+      'bg-gradient-to-br from-red-500 to-red-600',
+      'bg-gradient-to-br from-yellow-500 to-yellow-600',
+      'bg-gradient-to-br from-green-500 to-green-600',
+      'bg-gradient-to-br from-blue-500 to-blue-600',
+      'bg-gradient-to-br from-indigo-500 to-indigo-600',
+      'bg-gradient-to-br from-purple-500 to-purple-600',
+      'bg-gradient-to-br from-pink-500 to-pink-600'
     ];
     
-    const hash = name.split('').reduce((acc, char) => {
+    const hash = displayName.split('').reduce((acc, char) => {
       return acc + char.charCodeAt(0);
     }, 0);
     
@@ -118,10 +137,11 @@ export const Avatar: React.FC<AvatarProps> = ({
           className={`
             ${sizeClasses}
             ${roundedClasses}
-            ${getRandomColor()}
+            ${getAvatarColor()}
             text-white
             flex items-center justify-center
             font-medium
+            shadow-lg
             ${bordered ? 'border-2 border-white ring-2 ring-gray-200' : ''}
             ${onClick ? 'cursor-pointer' : ''}
             ${className}

@@ -193,16 +193,16 @@ const DoctorsPage: React.FC = () => {
                       className="rounded-full w-[100px] h-[100px] object-cover sm:mr-4 mb-4 sm:mb-0"
                     />
                     <div className="flex flex-col space-y-2 flex-1">
-                      <h2 className="text-lg font-medium">{doctor.firstName} {doctor.lastName}</h2>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      <h2 className="text-lg font-medium text-slate-900 dark:text-slate-900">{doctor.firstName} {doctor.lastName}</h2>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:text-slate-900">
                         {doctor.specialty}
                       </span>
-                      <div className="flex items-center">
+                      <div className="flex items-center text-slate-900 dark:text-slate-900">
                         <span>Rating:</span>
                         <span className="font-bold ml-1">{doctor.rating}/5</span>
                       </div>
                       {doctor.availability && (
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 dark:text-slate-900">
                           Available: {doctor.availability.join(', ')}
                         </p>
                       )}

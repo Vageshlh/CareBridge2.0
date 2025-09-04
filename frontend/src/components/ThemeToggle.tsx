@@ -13,7 +13,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       type="button"
       onClick={toggleTheme}
       className={`rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${className} ${
-        theme === 'dark' ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'
+        theme === 'dark' ? 'bg-gray-800 text-yellow-300' : 'bg-gray-200 text-gray-700'
       }`}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >

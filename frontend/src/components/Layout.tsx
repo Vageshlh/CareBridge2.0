@@ -4,15 +4,15 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
+import { Avatar } from './Avatar';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../hooks/useAuth';
 
-// Define navigation item type
-type NavigationItem = {
+// Navigation item interface
+interface NavigationItem {
   name: string;
   href: string;
-  isScroll?: boolean;
-};
+}
 
 // Navigation items for logged-in users
 const authenticatedNavigation: NavigationItem[] = [
@@ -24,11 +24,11 @@ const authenticatedNavigation: NavigationItem[] = [
 
 // Navigation items for logged-out users
 const publicNavigation: NavigationItem[] = [
-    { name: 'Home', href: '/' },
-    { name: 'Find Doctors', href: '/doctors' },
-    { name: 'About', href: '#about', isScroll: true },
-    { name: 'Contact', href: '#contact', isScroll: true },
-  ];
+  { name: 'Home', href: '/' },
+  { name: 'Find Doctors', href: '/doctors' },
+  { name: 'About', href: '/#about' },
+  { name: 'Contact', href: '/#contact' },
+];
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -48,7 +48,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-      <Disclosure as="nav" className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm ${theme === 'dark' ? 'bg-gray-800/80 shadow-md' : 'bg-white/80 shadow-sm'}`}>
+      <Disclosure as="nav" className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm ${theme === 'dark' ? 'bg-gray-800/90 shadow-md' : 'bg-white/90 shadow-sm'}`}>
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -56,7 +56,7 @@ const Layout: React.FC = () => {
                 <div className="flex">
                   <div className="flex flex-shrink-0 items-center">
                     <Link to="/">
-                      <Logo size="md" showText={true} />
+                      <Logo size="md" showText={true} textColor={theme === 'dark' ? 'text-white' : 'text-primary-600'} />
                     </Link>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -64,31 +64,13 @@ const Layout: React.FC = () => {
                       const isActive = location.pathname === item.href || 
                         (item.href !== '/' && location.pathname.startsWith(item.href));
                       
-                      if (item.isScroll) {
-                        return (
-                          <button
-                            key={item.name}
-                            onClick={() => {
-                              const element = document.querySelector(item.href);
-                              element?.scrollIntoView({ behavior: 'smooth' });
-                            }}
-                            className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium border-transparent ${theme === 'dark' ? 'text-gray-300 hover:border-gray-500 hover:text-gray-100' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700'}`}
-                            aria-label={`Scroll to ${item.name}`}
-                            role="menuitem"
-                            tabIndex={0}
-                          >
-                            {item.name}
-                          </button>
-                        );
-                      }
-                      
                       return (
                         <Link
                           key={item.name}
                           to={item.href}
                           className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${isActive
-                            ? `border-primary-500 ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`
-                            : `border-transparent ${theme === 'dark' ? 'text-gray-300 hover:border-gray-500 hover:text-gray-100' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700'}`
+                            ? 'border-primary-500 ' + (theme === 'dark' ? 'text-white' : 'text-gray-900')
+                            : 'border-transparent ' + (theme === 'dark' ? 'text-gray-300 hover:border-gray-600 hover:text-white' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700')
                           }`}
                           aria-current={isActive ? 'page' : undefined}
                           aria-label={`Navigate to ${item.name}`}
@@ -97,7 +79,8 @@ const Layout: React.FC = () => {
                         >
                           {item.name}
                         </Link>
-                      );                    })}
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-2">
@@ -118,11 +101,9 @@ const Layout: React.FC = () => {
                       {/* Profile dropdown - only show when authenticated */}
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className={`flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${theme === 'dark' ? 'bg-gray-700' : 'bg-white'}`}>
+                          <Menu.Button className={`flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2`}>
                             <span className="sr-only">Open user menu</span>
-                            <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center text-white">
-                              <span>{user?.firstName?.charAt(0) || 'U'}</span>
-                            </div>
+                            <Avatar size="sm" name={localStorage.getItem('firstName') || localStorage.getItem('profileName') || user?.firstName || undefined} />
                           </Menu.Button>
                         </div>
                         <Transition
@@ -225,22 +206,6 @@ const Layout: React.FC = () => {
                   : publicNavigation.map((item) => {
                       const isActive = location.pathname === item.href || 
                         (item.href !== '/' && location.pathname.startsWith(item.href));
-                      
-                      if (item.isScroll) {
-                        return (
-                          <Disclosure.Button
-                            key={item.name}
-                            as="button"
-                            onClick={() => {
-                              const element = document.querySelector(item.href);
-                              element?.scrollIntoView({ behavior: 'smooth' });
-                            }}
-                            className={`block border-l-4 py-2 pl-3 pr-4 text-base font-medium border-transparent ${theme === 'dark' ? 'text-gray-300 hover:border-gray-600 hover:bg-gray-800 hover:text-white' : 'text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800'}`}
-                          >
-                            {item.name}
-                          </Disclosure.Button>
-                        );
-                      }
                       
                       return (
                         <Disclosure.Button

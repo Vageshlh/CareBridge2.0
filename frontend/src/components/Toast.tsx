@@ -46,14 +46,26 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
 
   const addToast = useCallback(
     (toast: Omit<ToastProps, 'id' | 'onClose'>) => {
-      const id = Math.random().toString(36).substring(2, 9);
       setToasts((prevToasts) => {
-        // Remove oldest toasts if we exceed maxToasts
-        const newToasts = [...prevToasts];
-        if (newToasts.length >= maxToasts) {
-          newToasts.shift(); // Remove the oldest toast
+        // Check if there's already a toast with the same message and type
+        const existingToastIndex = prevToasts.findIndex(existingToast => 
+          existingToast.message === toast.message && existingToast.type === toast.type
+        );
+
+        if (existingToastIndex !== -1) {
+          // Remove existing toast and add new one to reset the timer
+          const updatedToasts = prevToasts.filter((_, index) => index !== existingToastIndex);
+          const id = Math.random().toString(36).substring(2, 9);
+          return [...updatedToasts, { ...toast, id, onClose: removeToast }].slice(-maxToasts);
+        } else {
+          // Add new toast normally
+          const id = Math.random().toString(36).substring(2, 9);
+          const newToasts = [...prevToasts];
+          if (newToasts.length >= maxToasts) {
+            newToasts.shift(); // Remove the oldest toast
+          }
+          return [...newToasts, { ...toast, id, onClose: removeToast }];
         }
-        return [...newToasts, { ...toast, id, onClose: removeToast }];
       });
     },
     [maxToasts, removeToast]
@@ -68,7 +80,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
     'top-left': 'top-0 left-0',
     'bottom-right': 'bottom-0 right-0',
     'bottom-left': 'bottom-0 left-0',
-    'top-center': 'top-0 left-1/2 transform -translate-x-1/2',
+    'top-center': 'top-4 left-1/2 transform -translate-x-1/2',
     'bottom-center': 'bottom-0 left-1/2 transform -translate-x-1/2'
   }[position];
 
@@ -76,8 +88,11 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
     <ToastContext.Provider value={{ toasts, addToast, removeToast, removeAllToasts }}>
       {children}
       <div
-        className={`fixed z-50 m-4 w-auto max-w-sm ${positionClasses}`}
-        style={{ pointerEvents: 'none' }}
+        className={`fixed w-auto max-w-sm ${positionClasses}`}
+        style={{ 
+          pointerEvents: 'none',
+          zIndex: 99999
+        }}
       >
         {toasts.map((toast) => (
           <Toast key={toast.id} {...toast} />
@@ -87,22 +102,42 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   );
 };
 
-const Toast: React.FC<ToastProps> = ({ id, type, message, duration = 5000, onClose }) => {
+const Toast: React.FC<ToastProps> = ({ id, type, message, duration = 3000, onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
       setTimeout(() => onClose(id), 300); // Wait for fade out animation
     }, duration);
+    
+    setTimeoutId(timer);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      setTimeoutId(null);
+    };
   }, [id, duration, onClose]);
 
   const handleClose = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
     setIsVisible(false);
     setTimeout(() => onClose(id), 300); // Wait for fade out animation
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClose();
+    }
+  };
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Toast styles based on type
   const toastStyles = {
@@ -127,8 +162,8 @@ const Toast: React.FC<ToastProps> = ({ id, type, message, duration = 5000, onClo
       ),
     },
     warning: {
-      bg: 'bg-yellow-50',
-      border: 'border-yellow-400',
+      bg: 'bg-yellow-100',
+      border: 'border-yellow-300',
       text: 'text-yellow-800',
       icon: (
         <svg className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -153,12 +188,18 @@ const Toast: React.FC<ToastProps> = ({ id, type, message, duration = 5000, onClo
   return (
     <div
       className={`
-        transform transition-all duration-300 ease-in-out mb-3
+        transform mb-3 cursor-pointer
+        ${prefersReducedMotion ? '' : 'transition-all duration-300 ease-in-out'}
         ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}
       `}
       style={{ pointerEvents: 'auto' }}
+      onClick={handleClose}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="status"
+      aria-live="polite"
     >
-      <div className={`rounded-md border p-4 shadow-lg ${style.bg} ${style.border}`} role="alert">
+      <div className={`rounded-lg border p-4 shadow-lg ${style.bg} ${style.border} hover:bg-opacity-80 transition-colors`}>
         <div className="flex">
           <div className="flex-shrink-0">{style.icon}</div>
           <div className="ml-3 flex-grow">
@@ -168,8 +209,12 @@ const Toast: React.FC<ToastProps> = ({ id, type, message, duration = 5000, onClo
             <div className="-mx-1.5 -my-1.5">
               <button
                 type="button"
-                className={`inline-flex rounded-md p-1.5 ${style.bg} ${style.text} hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${type}-50 focus:ring-${type}-600`}
-                onClick={handleClose}
+                className={`inline-flex rounded-md p-1.5 ${style.bg} ${style.text} hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-50 focus:ring-yellow-600`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClose();
+                }}
+                aria-label="Dismiss notification"
               >
                 <span className="sr-only">Dismiss</span>
                 <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

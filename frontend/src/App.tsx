@@ -32,7 +32,7 @@ const App: React.FC = () => {
       <ThemeProvider>
         <AuthProvider>
           <SocketProvider>
-            <ToastProvider>
+            <ToastProvider position="top-center">
             <Router>
               <React.Suspense
                 fallback={

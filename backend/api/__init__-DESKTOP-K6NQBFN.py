@@ -8,7 +8,7 @@ from api.prescriptions.routes import prescriptions_bp
 from api.admin.routes import admin_bp
 from api.clinics.routes import clinics_bp
 from api.reviews.routes import reviews_bp
-from api.webrtc.routes import webrtc_bp
+from api.notifications.routes import notifications_bp
 
 def register_blueprints(app):
     """
@@ -26,7 +26,7 @@ def register_blueprints(app):
     api_bp.register_blueprint(admin_bp)
     api_bp.register_blueprint(clinics_bp)
     api_bp.register_blueprint(reviews_bp)
-    api_bp.register_blueprint(webrtc_bp)
+    api_bp.register_blueprint(notifications_bp)
     
     # Register main API blueprint with app
     app.register_blueprint(api_bp)

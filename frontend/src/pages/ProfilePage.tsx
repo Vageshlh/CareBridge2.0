@@ -23,21 +23,30 @@ interface UserProfile {
 const ProfilePage: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   
-  // Mock user data - in a real app, this would come from an API
-  const [user, setUser] = useState<UserProfile>({
-    id: '123',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '(555) 123-4567',
-    dateOfBirth: '1985-06-15',
-    address: '123 Main St',
-    city: 'Anytown',
-    state: 'CA',
-    zipCode: '12345',
-    userType: 'patient',
-    profilePicture: '',
-  });
+  // Get user data from localStorage or use defaults
+  const getInitialUserData = (): UserProfile => {
+    const profileName = localStorage.getItem('profileName') || 'John Doe';
+    const firstName = localStorage.getItem('firstName') || 'John';
+    const [first, ...lastParts] = profileName.split(' ');
+    const lastName = lastParts.join(' ') || 'Doe';
+    
+    return {
+      id: '123',
+      firstName: first,
+      lastName: lastName,
+      email: 'user@example.com',
+      phone: '(555) 123-4567',
+      dateOfBirth: '1985-06-15',
+      address: '123 Main St',
+      city: 'Anytown',
+      state: 'CA',
+      zipCode: '12345',
+      userType: 'patient',
+      profilePicture: '',
+    };
+  };
+  
+  const [user, setUser] = useState<UserProfile>(getInitialUserData());
 
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First name is required'),
@@ -101,11 +110,9 @@ const ProfilePage: React.FC = () => {
                         alt="Profile"
                       />
                     ) : (
-                      <span className="h-24 w-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                        <svg className="h-12 w-12 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                      </span>
+                      <div className="h-24 w-24 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                        {user.firstName.charAt(0).toUpperCase()}
+                      </div>
                     )}
                   </div>
                   {isEditing && (
