@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -7,6 +7,8 @@ import Logo from './Logo';
 import { Avatar } from './Avatar';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../hooks/useAuth';
+import { ROLES } from '../constants/roles';
+import { menuByRole } from '../constants/menuConfig';
 
 // Navigation item interface
 interface NavigationItem {
@@ -15,12 +17,17 @@ interface NavigationItem {
 }
 
 // Navigation items for logged-in users
-const authenticatedNavigation: NavigationItem[] = [
-  { name: 'Home', href: '/' },
-  { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Appointments', href: '/appointments' },
-  { name: 'Doctors', href: '/doctors' },
-];
+const getAuthenticatedNavigation = (userType?: string): NavigationItem[] => {
+  const role = userType === 'doctor' ? ROLES.DOCTOR : ROLES.PATIENT;
+  const menuConfig = menuByRole[role];
+  
+  return [
+    { name: 'Home', href: '/' },
+    { name: menuConfig.dashboardName, href: menuConfig.dashboardHref },
+    { name: menuConfig.appointmentsName, href: menuConfig.appointmentsHref },
+    { name: 'Doctors', href: '/doctors' },
+  ];
+};
 
 // Navigation items for logged-out users
 const publicNavigation: NavigationItem[] = [
@@ -35,8 +42,10 @@ const Layout: React.FC = () => {
   const { theme } = useTheme();
   const { isAuthenticated, user } = useAuth();
   
-  // Determine which navigation items to show based on auth state
-  const navigation = isAuthenticated ? authenticatedNavigation : publicNavigation;
+  // Memoize navigation to ensure it updates when user changes
+  const navigation = useMemo(() => {
+    return isAuthenticated ? getAuthenticatedNavigation(user?.userType) : publicNavigation;
+  }, [isAuthenticated, user?.userType]);
   
   // Check if the current route is login or register
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
@@ -90,7 +99,7 @@ const Layout: React.FC = () => {
                     <>
                       {/* Notifications - only show when authenticated */}
                       <Link
-                        to="/notifications"
+                        to={user?.userType === 'doctor' ? '/doctor-notifications' : '/notifications'}
                         className={`rounded-full p-1 ${theme === 'dark' ? 'bg-gray-700 text-gray-300 hover:text-white' : 'bg-white text-gray-400 hover:text-gray-500'} focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2`}
                         aria-label="View notifications"
                       >
@@ -185,7 +194,7 @@ const Layout: React.FC = () => {
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 pt-2 pb-3" role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu">
                 {isAuthenticated
-                  ? authenticatedNavigation.map((item) => {
+                  ? getAuthenticatedNavigation(user?.userType).map((item) => {
                       const isActive = location.pathname === item.href || 
                         (item.href !== '/' && location.pathname.startsWith(item.href));
                       

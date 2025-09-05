@@ -62,12 +62,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       // Mock successful login for demo
       if (email && password) {
+        // Determine user type based on email for testing purposes
+        // In production, this would come from the backend API response
+        let userType: 'patient' | 'doctor' | 'admin' = 'patient';
+        if (email.includes('doctor') || email.includes('dr.')) {
+          userType = 'doctor';
+        } else if (email.includes('admin')) {
+          userType = 'admin';
+        }
+        
         const mockUser: User = {
           id: '123',
-          firstName: 'John',
+          firstName: userType === 'doctor' ? 'Dr. John' : 'John',
           lastName: 'Doe',
           email: email,
-          userType: 'patient',
+          userType: userType,
         };
         
         setUser(mockUser);

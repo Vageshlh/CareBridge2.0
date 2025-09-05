@@ -108,8 +108,18 @@ const RegisterPage: React.FC = () => {
       localStorage.setItem('firstName', values.firstName);
       localStorage.setItem('isAuthenticated', 'true');
       
-      // Redirect to sign-in page after successful registration
-      navigate('/login');
+      // Store user data with userType for proper redirection
+      const userData = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        userType: values.userType
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
+      
+      // Redirect to appropriate dashboard based on user type
+      const redirectPath = values.userType === 'doctor' ? '/doctor-dashboard' : '/dashboard';
+      navigate(redirectPath);
     } catch (error) {
       console.error('Registration error:', error);
       setErrors({ email: 'Registration failed. Please try again.' });

@@ -20,6 +20,12 @@ import NotificationsPage from './pages/NotificationsPage';
 import ProfilePage from './pages/ProfilePage';
 import DoctorsPage from './pages/DoctorsPage';
 import DoctorDetailPage from './pages/DoctorDetailPage';
+import DoctorDashboardPage from './pages/DoctorDashboardPage';
+import DoctorAppointmentsPage from './pages/DoctorAppointmentsPage';
+import DoctorRequestsPage from './pages/DoctorRequestsPage';
+import DoctorNotificationsPage from './pages/DoctorNotificationsPage';
+import DoctorPatientRecordsPage from './pages/DoctorPatientRecordsPage';
+import DoctorPrescriptionPage from './pages/DoctorPrescriptionPage';
 import ThemeTestPage from './pages/ThemeTestPage';
 
 // Lazy-loaded pages
@@ -76,7 +82,13 @@ const App: React.FC = () => {
                     
                     {/* Doctor routes */}
                     <Route element={<ProtectedRoute requireDoctor={true} />}>
-                      {/* Add doctor-specific routes here */}
+                      <Route path="doctor-dashboard" element={<DoctorDashboardPage />} />
+                      <Route path="doctor-appointments" element={<DoctorAppointmentsPage />} />
+                      <Route path="/doctor-requests" element={<DoctorRequestsPage />} />
+              <Route path="/doctor-notifications" element={<DoctorNotificationsPage />} />
+              <Route path="/doctor-patient-records/:id" element={<DoctorPatientRecordsPage />} />
+              <Route path="/doctor-prescription/:id" element={<DoctorPrescriptionPage />} />
+              <Route path="/video-consultation/:id" element={<VideoConsultationPage />} />
                     </Route>
                     
                     {/* 404 route */}

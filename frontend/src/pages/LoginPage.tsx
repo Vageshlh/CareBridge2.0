@@ -29,8 +29,24 @@ const LoginPage: React.FC = () => {
       const success = await login(values.email, values.password);
       
       if (success) {
-        // Navigate to the dashboard or the page they were trying to access
-        navigate(from, { replace: true });
+        // Get user info from localStorage after successful login
+        const storedUser = localStorage.getItem('user');
+        let redirectPath = from;
+        
+        // If no specific redirect path and user is a doctor, redirect to doctor dashboard
+        if (from === '/dashboard' && storedUser) {
+          try {
+            const user = JSON.parse(storedUser);
+            if (user.userType === 'doctor') {
+              redirectPath = '/doctor-dashboard';
+            }
+          } catch (error) {
+            console.error('Failed to parse user data:', error);
+          }
+        }
+        
+        // Navigate to the appropriate dashboard or the page they were trying to access
+        navigate(redirectPath, { replace: true });
       } else {
         setLoginError('Invalid email or password');
       }
