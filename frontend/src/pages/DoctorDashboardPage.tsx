@@ -214,15 +214,21 @@ const DoctorDashboardPage: React.FC = () => {
           <div className="p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <div className="h-6 w-6 rounded-full bg-green-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" 
+                       width="16" height="16" 
+                       fill="currentColor" 
+                       className="h-4 w-4 text-white" 
+                       viewBox="0 0 16 16">
+                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                  </svg>
+                </div>
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
                   <dt className="truncate text-sm font-medium text-gray-500">Today's Earnings</dt>
                   <dd>
-                    <div className="text-lg font-medium text-gray-900">${todayStats.earnings}</div>
+                    <div className="text-lg font-medium text-gray-900">₹{todayStats.earnings}</div>
                   </dd>
                 </dl>
               </div>

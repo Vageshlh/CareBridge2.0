@@ -13,6 +13,116 @@
   padding: 20px;
 }
 
+/* Custom styling for FullCalendar */
+.fc-theme-standard .fc-scrollgrid {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.fc-button-primary {
+  background-color: rgba(59, 130, 246, 0.8) !important;
+  border-color: rgba(59, 130, 246, 0.8) !important;
+}
+
+.fc-button-primary:hover {
+  background-color: rgba(59, 130, 246, 1) !important;
+  border-color: rgba(59, 130, 246, 1) !important;
+}
+
+.fc-day-today {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+}
+
+.fc-day-today-custom {
+  background-color: rgba(34, 197, 94, 0.15) !important;
+  border: 2px solid rgba(34, 197, 94, 0.3) !important;
+}
+
+.fc-daygrid-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.fc-event {
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .fc-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .fc-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+  
+  .fc-daygrid-day-number {
+    font-size: 0.875rem;
+  }
+  
+  .fc-col-header-cell {
+    padding: 0.25rem;
+  }
+  
+  .fc-daygrid-day {
+    min-height: 2.5rem;
+  }
+  
+  .fc-event {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.25rem;
+  }
+  
+  .fc-daygrid-event {
+    margin: 0.125rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .fc-toolbar-title {
+    font-size: 1rem;
+  }
+  
+  .fc-button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+  }
+  
+  .fc-daygrid-day-number {
+    font-size: 0.8rem;
+  }
+  
+  .fc-event {
+    font-size: 0.7rem;
+  }
+}
+
+.fc-toolbar-title {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.fc-col-header-cell {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
 /* Calendar Modal Content */
 .calendar-modal-content {
   background: white;
